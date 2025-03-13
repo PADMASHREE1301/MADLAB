@@ -1,0 +1,14 @@
+<resources>
+    <!-- Button dimensions -->
+    <dimen name="button_width">80dp</dimen>
+    <dimen name="button_height">80dp</dimen>
+    <dimen name="button_text_size">24sp</dimen>
+    <dimen name="button_margin">8dp</dimen>
+
+    <!-- Display dimensions -->
+    <dimen name="display_text_size">36sp</dimen>
+    <dimen name="display_padding">16dp</dimen>
+
+    <!-- Margin for the display area to add space from the top -->
+    <dimen name="display_margin_top">40dp</dimen> <!-- Increase this for more space -->
+</resources>

@@ -1,0 +1,137 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Display for the result -->
+    <TextView
+        android:id="@+id/display"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="@dimen/display_text_size"
+        android:gravity="end"
+        android:padding="@dimen/display_padding"
+        android:background="#000"
+        android:textColor="#fff"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/display_margin_top" /> <!-- Add margin from dimens.xml -->
+
+    <!-- Button Layout -->
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/display"
+        android:columnCount="4"
+        android:rowCount="5"
+        android:padding="10dp">
+
+        <!-- Row 1 -->
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:text="1"
+            android:textSize="24sp"
+            android:layout_margin="8dp" />
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:text="2"
+            android:textSize="24sp"
+            android:layout_margin="8dp" />
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:text="3"
+            android:textSize="24sp"
+            android:layout_margin="8dp" />
+        <Button
+            android:id="@+id/buttonAdd"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:text="+"
+            android:textSize="24sp"
+            android:layout_margin="8dp" />
+
+        <!-- Row 2 -->
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:text="4"
+            android:textSize="24sp"
+            android:layout_margin="8dp" />
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:text="5"
+            android:textSize="24sp"
+            android:layout_margin="8dp" />
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:text="6"
+            android:textSize="24sp"
+            android:layout_margin="8dp" />
+        <Button
+            android:id="@+id/buttonSubtract"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:text="-"
+            android:textSize="24sp"
+            android:layout_margin="8dp" />
+
+        <!-- Row 3 -->
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:text="7"
+            android:textSize="24sp"
+            android:layout_margin="8dp" />
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:text="8"
+            android:textSize="24sp"
+            android:layout_margin="8dp" />
+        <Button
+            android:id="@+id/button9"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:text="9"
+            android:textSize="24sp"
+            android:layout_margin="8dp" />
+        <Button
+            android:id="@+id/buttonClear"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:text="C"
+            android:textSize="24sp"
+            android:layout_margin="8dp" />
+
+        <!-- Row 4 -->
+        <Button
+            android:id="@+id/button0"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:text="0"
+            android:textSize="24sp"
+            android:layout_margin="8dp" />
+        <Button
+            android:id="@+id/buttonEquals"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:text="="
+            android:textSize="24sp"
+            android:layout_margin="8dp" />
+    </GridLayout>
+
+</RelativeLayout>
+
+
