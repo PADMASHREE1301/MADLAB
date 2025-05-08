@@ -1,0 +1,183 @@
+activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="File content will appear here"
+        android:textSize="16sp"
+        android:padding="16dp" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter text"
+        android:layout_below="@id/textView1"
+        android:layout_marginTop="20dp"
+        android:padding="16dp" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Data"
+        android:layout_below="@id/editText1"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"/>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Data"
+        android:layout_below="@id/editText1"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@id/button1"
+        android:layout_marginStart="20dp"/>
+</RelativeLayout>
+
+
+Main_activity.java
+
+package com.example.ex8;
+
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+
+public class MainActivity extends AppCompatActivity {
+    Button b1, b2;
+    EditText e;
+    TextView tv;
+    String s;
+    FileOutputStream fout;
+    FileInputStream fin;
+    NotificationManager notificationManager;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        tv = findViewById(R.id.textView1);
+        b1 = findViewById(R.id.button1);
+        b2 = findViewById(R.id.button2);
+        e = findViewById(R.id.editText1);
+
+        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        // Clear the file content each time the app starts
+        clearFile();
+
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                s = e.getText().toString();
+                try {
+                    // Write new data to the file
+                    File file = new File(getExternalFilesDir(null), "myfile.txt");
+                    fout = new FileOutputStream(file, true);
+                    fout.write((s + "\n").getBytes());
+                    fout.close();
+                    Toast.makeText(getBaseContext(), "Data saved to SD card!", Toast.LENGTH_SHORT).show();
+                    showNotification("Saved!", "Data saved successfully.");
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    Toast.makeText(getBaseContext(), "Error saving file.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    // Read the newly written file content
+                    File file = new File(getExternalFilesDir(null), "myfile.txt");
+                    fin = new FileInputStream(file);
+                    int c;
+                    StringBuilder temp = new StringBuilder();
+                    while ((c = fin.read()) != -1) {
+                        temp.append((char) c);
+                    }
+                    fin.close();
+                    tv.setText(temp.toString());
+                    Toast.makeText(getBaseContext(), "File read successfully!", Toast.LENGTH_SHORT).show();
+                    showNotification("Read!", "File read successfully.");
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    Toast.makeText(getBaseContext(), "Error reading file.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void clearFile() {
+        File file = new File(getExternalFilesDir(null), "myfile.txt");
+        if (file.exists()) {
+            if (file.delete()) {
+                Toast.makeText(getBaseContext(), "File cleared successfully.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getBaseContext(), "Error clearing the file.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void showNotification(String title, String message) {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "default")
+                .setSmallIcon(android.R.drawable.stat_notify_more)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        Notification notification = builder.build();
+        notificationManager.notify(1, notification);
+    }
+}
+
+
+AndroidManifest.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.ex8">
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.Ex8">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
+
+
