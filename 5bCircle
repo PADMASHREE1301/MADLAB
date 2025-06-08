@@ -1,0 +1,22 @@
+package com.example.graphics;
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.*;
+import android.os.Bundle;
+import android.view.View;
+public class MainActivity extends Activity {
+ protected void onCreate(Bundle savedInstanceState) {
+ super.onCreate(savedInstanceState);
+ setContentView(new MyView(this));
+ }
+ class MyView extends View {
+ public MyView(Context ctx) { super(ctx); }
+ protected void onDraw(Canvas canvas) {
+ Paint p = new Paint();
+ p.setColor(Color.BLUE);
+ p.setStyle(Paint.Style.STROKE);
+ p.setStrokeWidth(5);
+ canvas.drawCircle(300, 300, 150, p); // centerX, centerY, radius
+ }
+ }
+}
