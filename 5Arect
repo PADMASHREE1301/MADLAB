@@ -1,0 +1,23 @@
+package com.example.graphics;
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.*;
+import android.os.Bundle;
+import android.view.View;
+public class MainActivity extends Activity {
+ @Override
+ protected void onCreate(Bundle savedInstanceState) {
+ super.onCreate(savedInstanceState);
+ setContentView(new MyView(this));
+ }
+ class MyView extends View {
+ public MyView(Context context) { super(context); }
+ protected void onDraw(Canvas canvas) {
+ Paint p = new Paint();
+ p.setColor(Color.GREEN);
+ p.setStyle(Paint.Style.STROKE);
+ p.setStrokeWidth(5);
+ canvas.drawRect(100, 100, 400, 300, p);
+ }
+ }
+}
